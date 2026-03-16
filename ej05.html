@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio 5: Validación de Formulario</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial
+        }
+
+        input {
+            margin: 5px;
+            padding: 8px
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Formulario</h2>
+
+    <form onsubmit="return validar()">
+
+        <input id="nombre" placeholder="Nombre"><br>
+        <input id="correo" placeholder="Correo"><br>
+        <input id="pass" type="password" placeholder="Contraseña"><br>
+
+        <button type="submit">Enviar</button>
+
+    </form>
+
+    <script>
+
+        function validar() {
+
+            let nombre = document.getElementById("nombre").value;
+            let correo = document.getElementById("correo").value;
+            let pass = document.getElementById("pass").value;
+
+            if (nombre == "" || correo == "" || pass == "") {
+
+                alert("Complete todos los campos");
+
+                return false;
+
+            }
+
+            return true;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

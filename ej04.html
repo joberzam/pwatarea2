@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio 4: Reloj Analógico</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial
+        }
+
+        #reloj {
+            font-size: 40px;
+            margin-top: 50px
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Reloj en tiempo real</h2>
+
+    <div id="reloj"></div>
+
+    <script>
+
+        function actualizarReloj() {
+
+            let ahora = new Date();
+
+            let hora = ahora.toLocaleTimeString();
+
+            document.getElementById("reloj").innerText = hora;
+
+        }
+
+        setInterval(actualizarReloj, 1000);
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio 7: Menú de Navegación Desplegable</title>
+    <style>
+        body {
+            font-family: Arial
+        }
+
+        .menu {
+            background: #333;
+            padding: 10px
+        }
+
+        .menu button {
+            color: white;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .submenu {
+            display: none;
+            background: #eee;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="menu">
+
+        <button onclick="mostrar()">Menú</button>
+
+        <div id="sub" class="submenu">
+            <p>Inicio</p>
+            <p>Productos</p>
+            <p>Contacto</p>
+        </div>
+
+    </div>
+
+    <script>
+
+        function mostrar() {
+
+            let menu = document.getElementById("sub");
+
+            menu.style.display = (menu.style.display == "block") ? "none" : "block";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

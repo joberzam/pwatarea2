@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1: Cambio de Estilo al Clic</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center
+        }
+
+        #caja {
+            width: 200px;
+            height: 200px;
+            background: #87ceeb;
+            margin: 30px auto;
+            border-radius: 10px
+        }
+
+        button {
+            padding: 10px 20px
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Cambio de color al hacer clic</h2>
+
+    <div id="caja"></div>
+
+    <button onclick="cambiarColor()">Cambiar color</button>
+
+    <script>
+        function cambiarColor() {
+            let colores = ["red", "green", "blue", "orange", "purple"];
+            let random = colores[Math.floor(Math.random() * colores.length)];
+            document.getElementById("caja").style.background = random;
+        }
+    </script>
+
+</body>
+
+</html>

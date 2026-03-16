@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio 6: Lista de Tareas Interactiva</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial
+        }
+
+        li {
+            margin: 5px
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Lista de tareas</h2>
+
+    <input id="tarea">
+    <button onclick="agregar()">Agregar</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+
+        function agregar() {
+
+            let texto = document.getElementById("tarea").value;
+
+            let li = document.createElement("li");
+
+            li.innerHTML = texto + " <button onclick='this.parentElement.remove()'>X</button>";
+
+            document.getElementById("lista").appendChild(li);
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio 3: Cambio de Imagen al Pasar el Ratón</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial
+        }
+
+        img {
+            width: 400px;
+            border-radius: 10px;
+            transition: 0.4s
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Pasa el mouse sobre la imagen</h2>
+
+    <img id="foto" src="https://picsum.photos/id/1015/600/400" onmouseover="cambiar()" onmouseout="regresar()">
+
+    <script>
+
+        function cambiar() {
+            document.getElementById("foto").src = "https://picsum.photos/id/1025/600/400";
+        }
+
+        function regresar() {
+            document.getElementById("foto").src = "https://picsum.photos/id/1015/600/400";
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio 10: Juego de Preguntas y Respuestas</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Quiz</h2>
+
+    <p>¿Cuál es la capital de Ecuador?</p>
+
+    <button onclick="respuesta('a')">Quito</button>
+    <button onclick="respuesta('b')">Guayaquil</button>
+
+    <p id="resultado"></p>
+
+    <script>
+
+        function respuesta(op) {
+
+            if (op == "a") {
+
+                document.getElementById("resultado").innerText = "Correcto";
+
+            } else {
+
+                document.getElementById("resultado").innerText = "Incorrecto";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

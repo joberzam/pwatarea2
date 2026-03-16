@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio 9: Temporizador de Cuenta Regresiva/title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial
+        }
+
+        #timer {
+            font-size: 40px
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Cuenta regresiva</h2>
+
+    <div id="timer">10</div>
+
+    <script>
+
+        let tiempo = 10;
+
+        function cuenta() {
+
+            tiempo--;
+
+            document.getElementById("timer").innerText = tiempo;
+
+            if (tiempo <= 0) {
+
+                clearInterval(intervalo);
+
+                alert("Tiempo terminado");
+
+            }
+
+        }
+
+        let intervalo = setInterval(cuenta, 1000);
+
+    </script>
+
+</body>
+
+</html>

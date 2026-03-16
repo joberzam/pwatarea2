@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio 8: Carrusel de Imágenes</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial
+        }
+
+        img {
+            width: 500px
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Carrusel</h2>
+
+    <img id="img">
+
+    <script>
+
+        let imagenes = [
+            "https://picsum.photos/id/1015/600/400",
+            "https://picsum.photos/id/1016/600/400",
+            "https://picsum.photos/id/1018/600/400"
+        ];
+
+        let i = 0;
+
+        function cambiar() {
+
+            document.getElementById("img").src = imagenes[i];
+
+            i++;
+
+            if (i >= imagenes.length) { i = 0 }
+
+        }
+
+        setInterval(cambiar, 2000);
+
+        cambiar();
+
+    </script>
+
+</body>
+
+</html>
