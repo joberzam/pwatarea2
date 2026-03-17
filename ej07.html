@@ -11,7 +11,7 @@
             margin: 0;
         }
 
-        /* Menú principal */
+        /* MENÚ PRINCIPAL */
         .menu {
             display: flex;
             background: #333;
@@ -29,13 +29,25 @@
             text-decoration: none;
             font-size: 18px;
             cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
         }
 
-        /* Submenú */
+        /* EFECTO HOVER */
+        .menu-item a:hover {
+            background: #555;
+        }
+
+        /* ITEM ACTIVO */
+        .menu-item.active>a {
+            background: #3498db;
+        }
+
+        /* SUBMENÚ */
         .submenu {
             display: none;
             position: absolute;
-            top: 30px;
+            top: 35px;
             background: #fff;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -53,7 +65,7 @@
             background: #f0f0f0;
         }
 
-        /* Mostrar submenu */
+        /* MOSTRAR SUBMENÚ */
         .menu-item.active .submenu {
             display: block;
         }
@@ -64,7 +76,7 @@
 
     <div class="menu">
 
-        <div class="menu-item" onclick="toggleMenu(this)">
+        <div class="menu-item" onclick="activarMenu(this)">
             <a>Inicio</a>
             <div class="submenu">
                 <a href="#">Inicio 1</a>
@@ -72,7 +84,7 @@
             </div>
         </div>
 
-        <div class="menu-item" onclick="toggleMenu(this)">
+        <div class="menu-item" onclick="activarMenu(this)">
             <a>Productos</a>
             <div class="submenu">
                 <a href="#">Celulares</a>
@@ -81,7 +93,7 @@
             </div>
         </div>
 
-        <div class="menu-item" onclick="toggleMenu(this)">
+        <div class="menu-item" onclick="activarMenu(this)">
             <a>Servicios</a>
             <div class="submenu">
                 <a href="#">Soporte</a>
@@ -90,7 +102,7 @@
             </div>
         </div>
 
-        <div class="menu-item" onclick="toggleMenu(this)">
+        <div class="menu-item" onclick="activarMenu(this)">
             <a>Contacto</a>
             <div class="submenu">
                 <a href="#">Email</a>
@@ -102,18 +114,14 @@
 
     <script>
 
-        function toggleMenu(element) {
+        function activarMenu(element) {
 
-            // cerrar otros menús
+            // quitar activo a todos
             let items = document.querySelectorAll(".menu-item");
-            items.forEach(item => {
-                if (item !== element) {
-                    item.classList.remove("active");
-                }
-            });
+            items.forEach(item => item.classList.remove("active"));
 
-            // abrir/cerrar actual
-            element.classList.toggle("active");
+            // activar el seleccionado
+            element.classList.add("active");
 
         }
 
