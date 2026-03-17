@@ -1,30 +1,219 @@
-function responder(opcion){
+<!DOCTYPE html>
+<html lang="es">
 
-let correcta = preguntas[indice].correcta;
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Interactivo</title>
 
-let botones = document.querySelectorAll("#opciones button");
-let resultado = document.getElementById("resultado");
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f4f4f4;
+            margin: 0;
+        }
 
-// Deshabilitar botones después de responder
-botones.forEach(btn => btn.disabled = true);
+        .container {
+            background: white;
+            padding: 20px;
+            max-width: 500px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
 
-if(opcion === correcta){
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
 
-puntaje++;
-botones[opcion].classList.add("correcto");
-resultado.innerText = "Correcto ✅";
+        button:hover {
+            opacity: 0.9;
+        }
 
-}else{
+        .correcto {
+            background: green;
+            color: white;
+        }
 
-botones[opcion].classList.add("incorrecto");
-botones[correcta].classList.add("correcto");
-resultado.innerText = "Incorrecto ❌";
+        .incorrecto {
+            background: red;
+            color: white;
+        }
 
-}
+        #resultado {
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
 
-// Pasar a la siguiente pregunta
-setTimeout(() => {
+        #reiniciar {
+            background: #3498db;
+            color: white;
+            display: none;
+        }
+    </style>
 
-indice++;
+</head>
 
-if(indice < preguntas.length){ cargarPregunta(); }else{ mostrarResultado(); } }, 1500); }
+<body>
+
+    <div class="container">
+
+        <h2 id="pregunta">Pregunta</h2>
+
+        <div id="opciones"></div>
+
+        <p id="resultado"></p>
+
+        <button id="reiniciar" onclick="reiniciarJuego()">Reiniciar</button>
+
+    </div>
+
+    <script>
+
+        // LISTA DE PREGUNTAS
+        let preguntas = [
+
+            {
+                pregunta: "¿Cuál es la capital de Ecuador?",
+                opciones: ["Quito", "Guayaquil", "Cuenca"],
+                correcta: 0
+            },
+
+            {
+                pregunta: "¿Cuánto es 5 + 3?",
+                opciones: ["6", "8", "10"],
+                correcta: 1
+            },
+
+            {
+                pregunta: "¿Qué lenguaje se usa para diseño web?",
+                opciones: ["HTML", "Python", "Java"],
+                correcta: 0
+            },
+
+            {
+                pregunta: "¿Cuál es un sistema gestor de bases de datos?",
+                opciones: ["SQL Server", "Chrome", "Windows"],
+                correcta: 0
+            },
+
+            {
+                pregunta: "¿Qué significa CSS?",
+                opciones: [
+                    "Cascading Style Sheets",
+                    "Computer Style System",
+                    "Creative Style Syntax"
+                ],
+                correcta: 0
+            }
+
+        ];
+
+        let indice = 0;
+        let puntaje = 0;
+
+        // CARGAR PREGUNTA
+        function cargarPregunta() {
+
+            let p = preguntas[indice];
+
+            document.getElementById("pregunta").innerText = p.pregunta;
+
+            let opcionesHTML = "";
+
+            p.opciones.forEach((opcion, i) => {
+                opcionesHTML += `<button onclick="responder(${i})">${opcion}</button>`;
+            });
+
+            document.getElementById("opciones").innerHTML = opcionesHTML;
+
+            document.getElementById("resultado").innerText = "";
+
+        }
+
+        // RESPONDER
+        function responder(opcion) {
+
+            let correcta = preguntas[indice].correcta;
+
+            let botones = document.querySelectorAll("#opciones button");
+            let resultado = document.getElementById("resultado");
+
+            // bloquear botones
+            botones.forEach(btn => btn.disabled = true);
+
+            if (opcion === correcta) {
+
+                puntaje++;
+                botones[opcion].classList.add("correcto");
+                resultado.innerText = "✅ Correcto";
+
+            } else {
+
+                botones[opcion].classList.add("incorrecto");
+                botones[correcta].classList.add("correcto");
+                resultado.innerText = "❌ Incorrecto";
+
+            }
+
+            // siguiente pregunta
+            setTimeout(() => {
+
+                indice++;
+
+                if (indice < preguntas.length) {
+
+                    cargarPregunta();
+
+                } else {
+
+                    mostrarResultado();
+
+                }
+
+            }, 1500);
+
+        }
+
+        // RESULTADO FINAL
+        function mostrarResultado() {
+
+            document.getElementById("pregunta").innerText =
+                "Juego terminado 🎉";
+
+            document.getElementById("opciones").innerHTML =
+                "Tu puntaje: " + puntaje + " / " + preguntas.length;
+
+            document.getElementById("resultado").innerText = "";
+
+            document.getElementById("reiniciar").style.display = "block";
+
+        }
+
+        // REINICIAR
+        function reiniciarJuego() {
+
+            indice = 0;
+            puntaje = 0;
+
+            document.getElementById("reiniciar").style.display = "none";
+
+            cargarPregunta();
+
+        }
+
+        // INICIAR
+        cargarPregunta();
+
+    </script>
+
+</body>
+
+</html>
