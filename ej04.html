@@ -2,25 +2,113 @@
 <html>
 
 <head>
-    <title>Ejercicio 4: Reloj Analógico</title>
+    <title>Reloj Analógico</title>
+
     <style>
         body {
-            text-align: center;
-            font-family: Arial
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f4f4f4;
+            font-family: Arial;
         }
 
-        #reloj {
-            font-size: 40px;
-            margin-top: 50px
+        .reloj {
+            width: 250px;
+            height: 250px;
+            border: 8px solid black;
+            border-radius: 50%;
+            position: relative;
+            background: white;
+        }
+
+        .numero {
+            position: absolute;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .hora {
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .tres {
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        .seis {
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nueve {
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        .manecilla {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom;
+            transform: translateX(-50%) rotate(0deg);
+        }
+
+        .horas {
+            width: 6px;
+            height: 60px;
+            background: black;
+        }
+
+        .minutos {
+            width: 4px;
+            height: 80px;
+            background: blue;
+        }
+
+        .segundos {
+            width: 2px;
+            height: 100px;
+            background: red;
+        }
+
+        .centro {
+            width: 10px;
+            height: 10px;
+            background: black;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
+
 </head>
 
 <body>
 
-    <h2>Reloj en tiempo real</h2>
+    <div class="reloj">
 
-    <div id="reloj"></div>
+        <div class="numero hora">12</div>
+        <div class="numero tres">3</div>
+        <div class="numero seis">6</div>
+        <div class="numero nueve">9</div>
+
+        <div class="manecilla horas" id="hora"></div>
+        <div class="manecilla minutos" id="minuto"></div>
+        <div class="manecilla segundos" id="segundo"></div>
+
+        <div class="centro"></div>
+
+    </div>
 
     <script>
 
@@ -28,10 +116,22 @@
 
             let ahora = new Date();
 
-            let hora = ahora.toLocaleTimeString();
+            let horas = ahora.getHours() % 12;
+            let minutos = ahora.getMinutes();
+            let segundos = ahora.getSeconds();
 
-            document.getElementById("reloj").innerText = hora;
+            let gradoHora = (horas * 30) + (minutos / 2);
+            let gradoMinuto = minutos * 6;
+            let gradoSegundo = segundos * 6;
 
+            document.getElementById("hora").style.transform =
+                "translateX(-50%) rotate(" + gradoHora + "deg)";
+
+            document.getElementById("minuto").style.transform =
+                "translateX(-50%) rotate(" + gradoMinuto + "deg)";
+
+            document.getElementById("segundo").style.transform =
+                "translateX(-50%) rotate(" + gradoSegundo + "deg)";
         }
 
         setInterval(actualizarReloj, 1000);
