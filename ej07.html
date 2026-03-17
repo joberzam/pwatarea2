@@ -1,30 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-    <title>Ejercicio 7: Menú de Navegación Desplegable</title>
+    <meta charset="UTF-8">
+    <title>Menú Desplegable</title>
+
     <style>
         body {
-            font-family: Arial
+            font-family: Arial;
+            margin: 0;
         }
 
+        /* Menú principal */
         .menu {
+            display: flex;
             background: #333;
-            padding: 10px
+            padding: 10px;
+            justify-content: center;
         }
 
-        .menu button {
+        .menu-item {
+            position: relative;
+            margin: 0 20px;
+        }
+
+        .menu-item a {
             color: white;
-            background: none;
-            border: none;
+            text-decoration: none;
             font-size: 18px;
             cursor: pointer;
         }
 
+        /* Submenú */
         .submenu {
             display: none;
-            background: #eee;
+            position: absolute;
+            top: 30px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            min-width: 150px;
+        }
+
+        .submenu a {
+            display: block;
             padding: 10px;
+            color: black;
+            text-decoration: none;
+        }
+
+        .submenu a:hover {
+            background: #f0f0f0;
+        }
+
+        /* Mostrar submenu */
+        .menu-item.active .submenu {
+            display: block;
         }
     </style>
 </head>
@@ -33,23 +64,56 @@
 
     <div class="menu">
 
-        <button onclick="mostrar()">Menú</button>
+        <div class="menu-item" onclick="toggleMenu(this)">
+            <a>Inicio</a>
+            <div class="submenu">
+                <a href="#">Inicio 1</a>
+                <a href="#">Inicio 2</a>
+            </div>
+        </div>
 
-        <div id="sub" class="submenu">
-            <p>Inicio</p>
-            <p>Productos</p>
-            <p>Contacto</p>
+        <div class="menu-item" onclick="toggleMenu(this)">
+            <a>Productos</a>
+            <div class="submenu">
+                <a href="#">Celulares</a>
+                <a href="#">Laptops</a>
+                <a href="#">Accesorios</a>
+            </div>
+        </div>
+
+        <div class="menu-item" onclick="toggleMenu(this)">
+            <a>Servicios</a>
+            <div class="submenu">
+                <a href="#">Soporte</a>
+                <a href="#">Garantía</a>
+                <a href="#">Instalación</a>
+            </div>
+        </div>
+
+        <div class="menu-item" onclick="toggleMenu(this)">
+            <a>Contacto</a>
+            <div class="submenu">
+                <a href="#">Email</a>
+                <a href="#">Teléfono</a>
+            </div>
         </div>
 
     </div>
 
     <script>
 
-        function mostrar() {
+        function toggleMenu(element) {
 
-            let menu = document.getElementById("sub");
+            // cerrar otros menús
+            let items = document.querySelectorAll(".menu-item");
+            items.forEach(item => {
+                if (item !== element) {
+                    item.classList.remove("active");
+                }
+            });
 
-            menu.style.display = (menu.style.display == "block") ? "none" : "block";
+            // abrir/cerrar actual
+            element.classList.toggle("active");
 
         }
 
