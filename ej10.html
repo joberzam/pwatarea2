@@ -1,172 +1,30 @@
-<!DOCTYPE html>
-<html lang="es">
+function responder(opcion){
 
-<head>
-    <meta charset="UTF-8">
-    <title>Quiz Interactivo</title>
+let correcta = preguntas[indice].correcta;
 
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-            background: #f4f4f4;
-        }
+let botones = document.querySelectorAll("#opciones button");
+let resultado = document.getElementById("resultado");
 
-        .container {
-            background: white;
-            padding: 20px;
-            max-width: 500px;
-            margin: 50px auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
+// Deshabilitar botones después de responder
+botones.forEach(btn => btn.disabled = true);
 
-        button {
-            display: block;
-            margin: 10px auto;
-            padding: 10px;
-            width: 80%;
-            cursor: pointer;
-        }
+if(opcion === correcta){
 
-        .correcto {
-            background: green;
-            color: white;
-        }
+puntaje++;
+botones[opcion].classList.add("correcto");
+resultado.innerText = "Correcto ✅";
 
-        .incorrecto {
-            background: red;
-            color: white;
-        }
-    </style>
+}else{
 
-</head>
+botones[opcion].classList.add("incorrecto");
+botones[correcta].classList.add("correcto");
+resultado.innerText = "Incorrecto ❌";
 
-<body>
+}
 
-    <div class="container">
+// Pasar a la siguiente pregunta
+setTimeout(() => {
 
-        <h2 id="pregunta">Pregunta</h2>
+indice++;
 
-        <div id="opciones"></div>
-
-        <p id="resultado"></p>
-
-    </div>
-
-    <script>
-
-        let preguntas = [
-
-            {
-                pregunta: "¿Cuál es la capital de Ecuador?",
-                opciones: ["Quito", "Guayaquil", "Cuenca"],
-                correcta: 0
-            },
-
-            {
-                pregunta: "¿Cuánto es 5 + 3?",
-                opciones: ["6", "8", "10"],
-                correcta: 1
-            },
-
-            {
-                pregunta: "¿Qué lenguaje se usa para diseño web?",
-                opciones: ["HTML", "Python", "Java"],
-                correcta: 0
-            },
-
-            {
-                pregunta: "¿Cuál es un sistema gestor de bases de datos?",
-                opciones: ["SQL Server", "Chrome", "Windows"],
-                correcta: 0
-            },
-
-            {
-                pregunta: "¿Qué significa CSS?",
-                opciones: [
-                    "Cascading Style Sheets",
-                    "Computer Style System",
-                    "Creative Style Syntax"
-                ],
-                correcta: 0
-            }
-
-        ];
-
-        let indice = 0;
-        let puntaje = 0;
-
-        function cargarPregunta() {
-
-            let p = preguntas[indice];
-
-            document.getElementById("pregunta").innerText = p.pregunta;
-
-            let opcionesHTML = "";
-
-            p.opciones.forEach((opcion, i) => {
-
-                opcionesHTML += `<button onclick="responder(${i})">${opcion}</button>`;
-
-            });
-
-            document.getElementById("opciones").innerHTML = opcionesHTML;
-
-            document.getElementById("resultado").innerText = "";
-
-        }
-
-        function responder(opcion) {
-
-            let correcta = preguntas[indice].correcta;
-
-            let botones = document.querySelectorAll("#opciones button");
-
-            if (opcion === correcta) {
-
-                puntaje++;
-                botones[opcion].classList.add("correcto");
-
-            } else {
-
-                botones[opcion].classList.add("incorrecto");
-                botones[correcta].classList.add("correcto");
-
-            }
-
-            setTimeout(() => {
-
-                indice++;
-
-                if (indice < preguntas.length) {
-
-                    cargarPregunta();
-
-                } else {
-
-                    mostrarResultado();
-
-                }
-
-            }, 1000);
-
-        }
-
-        function mostrarResultado() {
-
-            document.getElementById("pregunta").innerText =
-                "Juego terminado 🎉";
-
-            document.getElementById("opciones").innerHTML =
-                "Tu puntaje: " + puntaje + " / " + preguntas.length;
-
-        }
-
-        cargarPregunta();
-
-    </script>
-
-</body>
-
-</html>
+if(indice < preguntas.length){ cargarPregunta(); }else{ mostrarResultado(); } }, 1500); }
