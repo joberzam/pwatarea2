@@ -2,17 +2,20 @@
 <html>
 
 <head>
-    <title>Ejercicio 9: Temporizador de Cuenta Regresiva/title>
+    <title>Temporizador</title>
+
     <style>
         body {
             text-align: center;
-            font-family: Arial
+            font-family: Arial;
         }
 
         #timer {
-            font-size: 40px
+            font-size: 40px;
+            margin-top: 50px;
         }
     </style>
+
 </head>
 
 <body>
@@ -27,21 +30,25 @@
 
         function cuenta() {
 
+            let elemento = document.getElementById("timer");
+
+            if (!elemento) return; // evita errores
+
             tiempo--;
 
-            document.getElementById("timer").innerText = tiempo;
+            elemento.innerText = tiempo;
 
             if (tiempo <= 0) {
-
                 clearInterval(intervalo);
-
                 alert("Tiempo terminado");
-
             }
 
         }
 
-        let intervalo = setInterval(cuenta, 1000);
+        // Espera a que cargue la página
+        window.onload = function () {
+            intervalo = setInterval(cuenta, 1000);
+        };
 
     </script>
 
