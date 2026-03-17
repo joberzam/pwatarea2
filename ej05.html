@@ -1,32 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-    <title>Ejercicio 5: Validación de Formulario</title>
+    <meta charset="UTF-8">
+    <title>Formulario Validado</title>
+
     <style>
         body {
+            font-family: Arial;
             text-align: center;
-            font-family: Arial
+        }
+
+        form {
+            margin-top: 30px;
         }
 
         input {
-            margin: 5px;
-            padding: 8px
+            padding: 10px;
+            margin: 10px;
+            width: 250px;
+        }
+
+        button {
+            padding: 10px 20px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
 
-    <h2>Formulario</h2>
+    <h2>Formulario con Validación</h2>
 
     <form onsubmit="return validar()">
 
-        <input id="nombre" placeholder="Nombre"><br>
-        <input id="correo" placeholder="Correo"><br>
-        <input id="pass" type="password" placeholder="Contraseña"><br>
+        <input type="text" id="nombre" placeholder="Nombre"><br>
+
+        <input type="email" id="correo" placeholder="Correo electrónico"><br>
+
+        <input type="password" id="password" placeholder="Contraseña"><br>
 
         <button type="submit">Enviar</button>
+
+        <p id="error" class="error"></p>
 
     </form>
 
@@ -34,17 +54,35 @@
 
         function validar() {
 
-            let nombre = document.getElementById("nombre").value;
-            let correo = document.getElementById("correo").value;
-            let pass = document.getElementById("pass").value;
+            let nombre = document.getElementById("nombre").value.trim();
+            let correo = document.getElementById("correo").value.trim();
+            let password = document.getElementById("password").value.trim();
 
-            if (nombre == "" || correo == "" || pass == "") {
+            let error = "";
 
-                alert("Complete todos los campos");
-
-                return false;
-
+            // Validar campos vacíos
+            if (nombre == "" || correo == "" || password == "") {
+                error = "Todos los campos son obligatorios";
             }
+
+            // Validar correo (expresión regular)
+            let regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!regexCorreo.test(correo)) {
+                error = "Correo electrónico inválido";
+            }
+
+            // Validar contraseña (mínimo 6 caracteres)
+            if (password.length < 6) {
+                error = "La contraseña debe tener al menos 6 caracteres";
+            }
+
+            if (error != "") {
+                document.getElementById("error").innerText = error;
+                return false;
+            }
+
+            alert("Formulario enviado correctamente");
 
             return true;
 
